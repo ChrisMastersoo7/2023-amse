@@ -3,12 +3,12 @@
 ## Summary
 
 <!-- Describe your data science project in max. 5 sentences. -->
-This projects analyzes the distribution of mountainbike trails in different regions.
+This project analyzes the distribution of mountainbike trails in different regions.
 
 ## Rationale
 
 <!-- Outline the impact of the analysis, e.g. which pains it solves. -->
-The analysis helps have a good overview to find the best region for mountainbiking.
+The analysis helps to have a good overview to find the best region for mountain biking.
 
 ## Datasources
 
