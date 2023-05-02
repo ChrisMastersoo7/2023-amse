@@ -35,9 +35,11 @@ Data of different bike trails from different locations.
 3. Try to solve the goal of the project [#3][i3]
 4. Visualization of the datasets [#4][i4]
 5. Space for optional tasks [#5][i5]
+6. Create final report [#6][i6]
 
 [i1]: https://github.com/ChrisMastersoo7/2023-amse/issues/1
 [i2]: https://github.com/ChrisMastersoo7/2023-amse/issues/2
 [i3]: https://github.com/ChrisMastersoo7/2023-amse/issues/3
 [i4]: https://github.com/ChrisMastersoo7/2023-amse/issues/4
 [i5]: https://github.com/ChrisMastersoo7/2023-amse/issues/5
+[i6]: https://github.com/ChrisMastersoo7/2023-amse/issues/6
