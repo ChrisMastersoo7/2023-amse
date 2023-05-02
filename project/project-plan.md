@@ -19,18 +19,25 @@ The analysis helps have a good overview to find the best region for mountainbiki
 https://gis.tirol.gv.at/ogd/sport_freizeit/TW_BikeTrailTirol_Mehrtagestouren.zip
 https://gis.tirol.gv.at/ogd/sport_freizeit/TW_BikeTrailTirol_Tagestouren.zip
 * Data Type: ZIP
-### Datasource1: ExampleSource
-* Metadata URL: https://mobilithek.info/offers/-6901989592576801458
-* Data URL: https://raw.githubusercontent.com/od-ms/radverkehr-zaehlstellen/main/100035541/2019-01.csv
-* Data Type: CSV
+### Datasource2: Freizeitrouten und Radfernwege Hamburg
+* Metadata URL: https://mobilithek.info/offers/-3233407406425016501
+* Data URL: https://api.hamburg.de/datasets/v1/freizeitrouten/collections
+* Data Type: GML/GeoJSON
 
-Short description.
+Data of different bike trails from different locations.
 
 ## Work Packages
 
 <!-- List of work packages ordered sequentially, each pointing to an issue with more details. -->
 
-1. Example Issue [#1][i1]
-2. ...
+1. Explore more datasets [#1][i1]
+2. Prepare data for analysis [#2][i2]
+3. Try to solve the goal of the project [#3][i3]
+4. Visualization of the datasets [#4][i4]
+5. Space for optional tasks [#5][i5]
 
-[i1]: https://github.com/jvalue/2023-amse-template/issues/1
+[i1]: https://github.com/ChrisMastersoo7/2023-amse/issues/1
+[i2]: https://github.com/ChrisMastersoo7/2023-amse/issues/2
+[i3]: https://github.com/ChrisMastersoo7/2023-amse/issues/3
+[i4]: https://github.com/ChrisMastersoo7/2023-amse/issues/4
+[i5]: https://github.com/ChrisMastersoo7/2023-amse/issues/5
