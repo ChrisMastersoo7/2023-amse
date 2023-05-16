@@ -18,7 +18,7 @@ The analysis helps to have a good overview to find the best region for mountain 
 * Data URL: https://gis.tirol.gv.at/ogd/sport_freizeit/TW_BikeTrailTirol_Einzeletappen.zip
 https://gis.tirol.gv.at/ogd/sport_freizeit/TW_BikeTrailTirol_Mehrtagestouren.zip
 https://gis.tirol.gv.at/ogd/sport_freizeit/TW_BikeTrailTirol_Tagestouren.zip
-* Data Type: ZIP
+* Data Type: ZIP/GPX
 ### Datasource2: Freizeitrouten und Radfernwege Hamburg
 * Metadata URL: https://mobilithek.info/offers/-3233407406425016501
 * Data URL: https://api.hamburg.de/datasets/v1/freizeitrouten/collections
