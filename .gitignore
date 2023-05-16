@@ -1,0 +1,4 @@
+/project/data/tmp/
+/project/data/tmp/*
+/project/data/tirol.sqlite
+/project/data/hamburg.sqlite
