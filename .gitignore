@@ -1,7 +1,13 @@
+.vscode
+
 /project/data/tmp/
 /project/data/tmp/*
 /project/data/tirol.sqlite
 /project/data/hamburg.sqlite
+/project/data/test.sqlite
+/project/data/.pytest_cache
+project/data/__pycache__
+
 
 /exercises/tmp/
 /exercises/tmp/*
