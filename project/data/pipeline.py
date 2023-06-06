@@ -41,6 +41,16 @@ class Pipeline:
                         pass
         return pd.concat(data_frames)
     
+    def extract_from_GeoJSON_to_gdf(self, url):
+        filename = self.path_pipeline_sub_dir.joinpath('{}.json'.format(url.split('/')[7]))
+        with urllib.request.urlopen(url) as response, open(filename, 'wb') as out_file:
+            shutil.copyfileobj(response, out_file)
+            try:
+                gdf = gpd.read_file(filename)
+                return gdf
+            except:
+                pass
+            
     def extract_from_GeoJSON_to_df(self, url):
         filename = self.path_pipeline_sub_dir.joinpath('{}.json'.format(url.split('/')[7]))
         with urllib.request.urlopen(url) as response, open(filename, 'wb') as out_file:
@@ -57,6 +67,13 @@ class Pipeline:
             #gdf['lon'] = gdf['geometry'].apply(lambda p: p.x)
             #gdf['lat'] = gdf.point_object.apply(lambda p: p.y)
             
+    def create_spatial_database(self, geodataframe:gpd.GeoDataFrame, name_of_root_tmp_dir=None, name_of_database=None):
+        if name_of_root_tmp_dir is None:
+            name_of_root_tmp_dir = self.name_of_root_tmp_dir
+        if name_of_database is None:
+            name_of_database = self.name
+        parent_path = Path(name_of_root_tmp_dir).parent
+        geodataframe.to_file('{}/{}.sqlite'.format(parent_path.absolute(), name_of_database), driver='SQLite', spatialite=True, layer=name_of_database)
     
     def create_database(self, dataframe:pd.DataFrame, name_of_root_tmp_dir=None, name_of_database=None):
         if name_of_root_tmp_dir is None:
@@ -138,10 +155,24 @@ if __name__ == "__main__":
     
     hamburg_pipeline = Pipeline('hamburg')
     hamburg_dfs = list()
+    '''
     for url in hamburg_urls:
         hamburg_df = hamburg_pipeline.extract_from_GeoJSON_to_df(url)
         hamburg_dfs.append(hamburg_df)
     hamburg_df = pd.concat(hamburg_dfs)
     hamburg_pipeline.create_database(hamburg_df)
+    '''
+    for url in hamburg_urls:
+        hamburg_gdf = hamburg_pipeline.extract_from_GeoJSON_to_gdf(url)
+        hamburg_dfs.append(hamburg_gdf)
+    hamburg_gdf = gpd.GeoDataFrame( pd.concat( hamburg_dfs, ignore_index=True))
+    hamburg_pipeline.create_spatial_database(hamburg_gdf)
     
+# use sqlite spatial databse and check to plot
+'''
+gdf.to_file(
+    'dataframe.sqlite', driver='SQLite', spatialite=True, layer='test'
+)  
+gpd.GeoDataFrame( pd.concat( dataframesList, ignore_index=True) )
+'''
     
