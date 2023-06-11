@@ -23,6 +23,28 @@ class Pipeline:
             shutil.copyfileobj(response, out_file)
             shutil.unpack_archive(self.path_pipeline_sub_dir.joinpath(url.rsplit('/')[-1]), self.path_pipeline_sub_dir.joinpath(url.rsplit('/')[-1].rsplit('.')[0]), 'zip')
     
+    def convert_from_gpx_to_gdf(self):
+        geo_data_frames = list()
+        track = gpd.GeoDataFrame(columns=['name', 'geometry'], geometry='geometry')
+        for root, dirs, files in os.walk(self.name_of_root_tmp_dir):
+            for file in files:
+                if file.endswith('.gpx'):
+                    # handle umlauts
+                    # special_char_map = {ord('ä'):'ae', ord('ü'):'ue', ord('ö'):'oe', ord('ß'):'ss'}
+                    # umlaut = os.path.join(root, file)
+                    # umlaut.translate(special_char_map)
+                    try:
+                        gdf = gpd.read_file(os.path.join(root, file), layer='tracks')
+                        # df.columns.values[0] = file.rsplit('.')[0]
+                        track = pd.concat([track, gdf[['name', 'geometry']]])
+                        track.sort_values(by="name", inplace=True)
+                        track.reset_index(inplace=True, drop=True)
+                        geo_data_frames.append(track)
+                    except UnicodeDecodeError:
+                        # TODO: fix umlaute
+                        pass
+        return gpd.GeoDataFrame(pd.concat(geo_data_frames, ignore_index=True))
+    
     def convert_from_gpx_to_df(self):
         data_frames = list()
         for root, dirs, files in os.walk(self.name_of_root_tmp_dir):
@@ -100,9 +122,12 @@ if __name__ == "__main__":
     tirol_pipeline = Pipeline('tirol')
     for url in tirol_urls:
         tirol_pipeline.extract_zip(url)
+    '''
     df = tirol_pipeline.convert_from_gpx_to_df()
     tirol_pipeline.create_database(df)
-    
+    '''
+    gdf = tirol_pipeline.convert_from_gpx_to_gdf()
+    tirol_pipeline.create_spatial_database(gdf)
     # Hamburg source data in GeoJSON
 
     hamburg_urls = []
