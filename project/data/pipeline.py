@@ -56,7 +56,7 @@ class Pipeline:
                     # umlaut.translate(special_char_map)
                     try:
                         df = Converter(input_file=os.path.join(root, file)).gpx_to_dataframe()
-                        df.columns.values[0] = file.rsplit('.')[0]
+                        df['name'] = file.rsplit('.')[0]
                         data_frames.append(df)
                     except UnicodeDecodeError:
                         # TODO: fix umlaute
@@ -123,8 +123,8 @@ if __name__ == "__main__":
     for url in tirol_urls:
         tirol_pipeline.extract_zip(url)
     
-    df = tirol_pipeline.convert_from_gpx_to_df()
-    tirol_pipeline.create_database(df)
+    tirol_df = tirol_pipeline.convert_from_gpx_to_df()
+    tirol_pipeline.create_database(tirol_df)
     '''
     gdf = tirol_pipeline.convert_from_gpx_to_gdf()
     tirol_pipeline.create_spatial_database(gdf)
