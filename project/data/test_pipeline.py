@@ -46,7 +46,7 @@ def test_extract_zip(input_test_pipline):
     test_zip_url = "https://gis.tirol.gv.at/ogd/sport_freizeit/TW_BikeTrailTirol_Einzeletappen.zip"
     input_test_pipline.extract_zip(test_zip_url)
     test_df = input_test_pipline.convert_from_gpx_to_df()
-    assert os.path.exists("./project/data/tmp/TW_BikeTrailTirol_Einzeletappen.zip") == True
+    assert os.path.exists("./project/data/tmp/tirol/TW_BikeTrailTirol_Einzeletappen.zip") == True
     assert test_df is not None
 
 @pytest.mark.integration_test

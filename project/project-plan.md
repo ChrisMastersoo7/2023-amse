@@ -23,7 +23,7 @@ https://gis.tirol.gv.at/ogd/sport_freizeit/TW_BikeTrailTirol_Tagestouren.zip
 * Metadata URL: https://mobilithek.info/offers/-3233407406425016501
 * Data URL: https://api.hamburg.de/datasets/v1/freizeitrouten/collections
 * Data Type: GML/GeoJSON
-### Datasource3: 
+### Datasource3: Radverkehrsanlagen Muenchen
 * Metadata URL: https://opendata.muenchen.de/dataset/radverkehrsanlagen-im-strassenunterhalt-der-landeshauptstadt-muenchen/resource/edcb7ad4-7ceb-42a5-b1ef-4762929d154d
 * Data URL: https://opendata.muenchen.de/dataset/7ad3bc6c-4c1a-4a63-9cb2-0d613f5b69fa/resource/edcb7ad4-7ceb-42a5-b1ef-4762929d154d/download/shape_radwege_t2_opendata.zip
 * Data Type: ZIP/SHP
