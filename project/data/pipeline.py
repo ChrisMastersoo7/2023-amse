@@ -122,13 +122,13 @@ if __name__ == "__main__":
     tirol_pipeline = Pipeline('tirol')
     for url in tirol_urls:
         tirol_pipeline.extract_zip(url)
-    '''
+    
     df = tirol_pipeline.convert_from_gpx_to_df()
     tirol_pipeline.create_database(df)
     '''
     gdf = tirol_pipeline.convert_from_gpx_to_gdf()
     tirol_pipeline.create_spatial_database(gdf)
-    
+    '''
     # Hamburg source data in GeoJSON
 
     hamburg_urls = []
