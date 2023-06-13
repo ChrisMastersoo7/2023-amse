@@ -128,6 +128,7 @@ if __name__ == "__main__":
     '''
     gdf = tirol_pipeline.convert_from_gpx_to_gdf()
     tirol_pipeline.create_spatial_database(gdf)
+    
     # Hamburg source data in GeoJSON
 
     hamburg_urls = []
@@ -200,4 +201,13 @@ gdf.to_file(
 )  
 gpd.GeoDataFrame( pd.concat( dataframesList, ignore_index=True) )
 '''
+
+# Muenchen data source in zip format
+
+muenchen_url = 'https://opendata.muenchen.de/dataset/7ad3bc6c-4c1a-4a63-9cb2-0d613f5b69fa/resource/edcb7ad4-7ceb-42a5-b1ef-4762929d154d/download/shape_radwege_t2_opendata.zip'
+
+muenchen_pipeline = Pipeline('muenchen')
+muenchen_pipeline.extract_zip(muenchen_url)
+muenchen_gdf = gpd.read_file("./project/data/tmp/muenchen/shape_radwege_t2_opendata/Radwege_T2_OpenData.shp")
+muenchen_pipeline.create_spatial_database(muenchen_gdf)
     
