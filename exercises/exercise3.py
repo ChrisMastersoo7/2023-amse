@@ -9,5 +9,6 @@ df = pd.read_csv(dataset_url, sep=';', encoding="latin1", header=None, skiprows=
                  converters={'CIN': str})
 
 df = df[df["petrol"].str.contains("-")==False]
+df = df.astype({'petrol':'int64', 'diesel':'int64', 'gas':'int64', 'electro':'int64', 'hybrid':'int64', 'plugInHybrid':'int64', 'others':'int64'})
 
 df.to_sql('cars', 'sqlite:///cars.sqlite', if_exists='replace', index=False)
