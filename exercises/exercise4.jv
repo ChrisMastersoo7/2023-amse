@@ -23,26 +23,26 @@ pipeline TemperaturePipeline {
     block TemperatureCSVInterpreter oftype CSVInterpreter { delimiter: ";"; }
     
     block TemperatureTableInterpreter oftype TableInterpreter {
-        header: true;
+        header: false;
         columns: [
             "Geraet" oftype GeraetID,
             "Hersteller" oftype text,
             "Model" oftype text,
-            "Monat" oftype text,
-            "Temperatur in °C (DWD)" oftype decimal,
-            "Batterietemperatur in °C" oftype decimal,
+            "Monat" oftype integer,
+            "Temperatur" oftype decimal,
+            "Batterietemperatur" oftype decimal,
             "Geraet aktiv" oftype text,
         ];
     }
 
     block CelsiusToFahrenheitTransformer oftype TableTransformer {
-        inputColumn: 'Temperatur in °C (DWD)';
+        inputColumn: 'Temperatur';
         outputColumn: 'Temperatur';
         use: CelsiusToFahrenheit;
     }
 
     block BatterieCelsiusToFahrenheitTransformer oftype TableTransformer {
-        inputColumn: 'Batterietemperatur in °C';
+        inputColumn: 'Batterietemperatur';
         outputColumn: 'Batterietemperatur';
         use: CelsiusToFahrenheit;
     }
