@@ -1,0 +1,61 @@
+
+transform CelsiusToFahrenheit {
+  from tempCelsius oftype decimal;
+  to tempFahrenheit oftype decimal;
+
+  tempFahrenheit: ((tempCelsius * 9/5) + 32);
+}
+
+valuetype GeraetID oftype integer {
+constraints: [ GeraetIDRange ];
+}
+
+constraint GeraetIDRange oftype RangeConstraint {
+  lowerBound: 0;
+  lowerBoundInclusive: false;
+}
+
+pipeline TemperaturePipeline {
+    block DataExtractor oftype HttpExtractor { url: "https://www.mowesta.com/data/measure/mowesta-dataset-20221107.zip"; }
+    block ZipArchiveInterpreter oftype ArchiveInterpreter { archiveType: "zip"; }
+    block AgencyFilePicker oftype FilePicker { path: "/data.csv"; }
+    block TemperatureTextFileInterpreter oftype TextFileInterpreter {}
+    block TemperatureCSVInterpreter oftype CSVInterpreter { delimiter: ";"; }
+    
+    block TemperatureTableInterpreter oftype TableInterpreter {
+        header: true;
+        columns: [
+            "Geraet" oftype GeraetID,
+            "Hersteller" oftype text,
+            "Model" oftype text,
+            "Monat" oftype text,
+            "Temperatur in °C (DWD)" oftype decimal,
+            "Batterietemperatur in °C" oftype decimal,
+            "Geraet aktiv" oftype text,
+        ];
+    }
+
+    block CelsiusToFahrenheitTransformer oftype TableTransformer {
+        inputColumn: 'Temperatur in °C (DWD)';
+        outputColumn: 'Temperatur';
+        use: CelsiusToFahrenheit;
+    }
+
+    block BatterieCelsiusToFahrenheitTransformer oftype TableTransformer {
+        inputColumn: 'Batterietemperatur in °C';
+        outputColumn: 'Batterietemperatur';
+        use: CelsiusToFahrenheit;
+    }
+
+    block DatabaseLoader oftype SQLiteLoader { table: "temperatures"; file: "./temperatures.sqlite"; }
+
+    DataExtractor
+        ->ZipArchiveInterpreter
+        ->AgencyFilePicker
+        ->TemperatureTextFileInterpreter
+        ->TemperatureCSVInterpreter
+        ->TemperatureTableInterpreter
+        ->CelsiusToFahrenheitTransformer
+        ->BatterieCelsiusToFahrenheitTransformer
+        ->DatabaseLoader;
+}

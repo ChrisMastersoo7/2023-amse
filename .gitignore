@@ -14,4 +14,5 @@ project/data/__pycache__
 /exercises/tmp/*
 airports.sqlite
 trainstops.sqlite
+temperatures.sqlite
 cars.sqlite
