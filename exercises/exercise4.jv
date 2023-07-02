@@ -21,7 +21,7 @@ pipeline TemperaturePipeline {
     block AgencyFilePicker oftype FilePicker { path: "/data.csv"; }
     block TemperatureTextFileInterpreter oftype TextFileInterpreter {}
     block TemperatureCSVInterpreter oftype CSVInterpreter { delimiter: ";"; }
-    
+    block CustomColumnDeleter oftype ColumnDeleter { delete: [column F, column G, column H, column I]; }
     block TemperatureTableInterpreter oftype TableInterpreter {
         header: false;
         columns: [
@@ -46,7 +46,7 @@ pipeline TemperaturePipeline {
         outputColumn: 'Batterietemperatur';
         use: CelsiusToFahrenheit;
     }
-
+    
     block DatabaseLoader oftype SQLiteLoader { table: "temperatures"; file: "./temperatures.sqlite"; }
 
     DataExtractor
@@ -54,6 +54,7 @@ pipeline TemperaturePipeline {
         ->AgencyFilePicker
         ->TemperatureTextFileInterpreter
         ->TemperatureCSVInterpreter
+        ->CustomColumnDeleter
         ->TemperatureTableInterpreter
         ->CelsiusToFahrenheitTransformer
         ->BatterieCelsiusToFahrenheitTransformer
