@@ -21,7 +21,7 @@ extract_zip(dataset_url)
 
 columns = ['stop_id', 'stop_name', 'stop_lat', 'stop_lon', 'zone_id']
 
-df = pd.read_csv('GTFS/stops.txt', encoding='latin1', sep=',') 
+df = pd.read_csv('GTFS/stops.txt', encoding='utf-8', sep=',') 
 
 df = df[columns]
 
