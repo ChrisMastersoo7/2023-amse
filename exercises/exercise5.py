@@ -29,7 +29,7 @@ df = df.astype({'stop_id':'int64', 'stop_name':'str', 'stop_lat':'float', 'stop_
 
 df = df[df['zone_id'] == 2001]
 
-#df = df[df['stop_name'].str.match(r'/[^a-zA-Z0-9äöüÄÖÜß]/g')]
+df = df[df['stop_name'].str.match(r'^[a-zA-Z0-9\säöüÄÖÜß.,\/-]+$')]
 
 df = df[df['stop_lat'].between(-90, 90)]
 
