@@ -16,3 +16,4 @@ airports.sqlite
 trainstops.sqlite
 temperatures.sqlite
 cars.sqlite
+gtfs.sqlite
